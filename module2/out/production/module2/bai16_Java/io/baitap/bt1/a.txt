@@ -1,0 +1,3 @@
+Nguyen Van A , 25 , male
+Nguyen Van B , 20 , male
+Nguyen Van C , 18 , Female
