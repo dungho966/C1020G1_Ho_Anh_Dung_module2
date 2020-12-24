@@ -1,15 +1,17 @@
 package bai11_DSA_Stack_queue.baitap;
 
+import java.util.Scanner;
 import java.util.Stack;
 
 public class ReverseStack {
     public static void main(String[] args) {
         Stack<Integer> stack = new Stack<>();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
-        stack.push(5);
+        String [] a = new String[0];
+        System.out.println("enter size:  ");
+        Scanner scanner = new Scanner(System.in);
+        for(int i = 0 ; i < a.length; i++  ){
+
+        }
         System.out.println(stack);
 
         Stack<Integer> stack1 = new Stack<>();
