@@ -1,29 +1,17 @@
 package bai12_java_colection_framework.baitap;
-import java.util.ArrayList;
 
 public class Product {
-    private int id ;
     private String name ;
-    private String productInformation ;
+    private int ID ;
     private int price ;
 
-    public Product(){
-
+    public Product() {
     }
 
-    public Product(int id, String name, String productInformation, int price) {
-        this.id = id;
+    public Product(String name, int ID, int price) {
         this.name = name;
-        this.productInformation = productInformation;
+        this.ID = ID;
         this.price = price;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -34,12 +22,12 @@ public class Product {
         this.name = name;
     }
 
-    public String getProductInformation() {
-        return productInformation;
+    public int getID() {
+        return ID;
     }
 
-    public void setProductInformation(String productInformation) {
-        this.productInformation = productInformation;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public int getPrice() {
@@ -50,7 +38,12 @@ public class Product {
         this.price = price;
     }
 
-    public String toString(){
-        return "name: " +name+ "\n id: " +id+ "\n productInformation: " +productInformation+ "\n price: "+price ;
+
+    public String displayProduct() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", ID=" + ID +
+                ", price=" + price +
+                '}';
     }
 }
