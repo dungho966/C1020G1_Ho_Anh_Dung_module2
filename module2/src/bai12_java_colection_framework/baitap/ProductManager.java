@@ -80,4 +80,9 @@ public class ProductManager extends Product {
         System.out.println("Enter ID You Want To ShowInfo:  ");
 
     }
+
+    public static void main(String[] args) {
+        Product product = new Product();
+        product.displayProduct();
+    }
 }
