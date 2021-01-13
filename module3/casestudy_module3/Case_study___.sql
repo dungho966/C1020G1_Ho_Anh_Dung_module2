@@ -88,12 +88,11 @@ FROM
 WHERE
     ((DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) BETWEEN 18 AND 50)
         AND (address LIKE 'Quảng Trị'
-        OR address LIKE 'Đà Nẵng');      
+        OR address LIKE 'Đà Nẵng');
         
 -- task4 
 SELECT 
-    customer.*,
-    COUNT(contract.customer_id) AS so_lan_dat_phong
+    customer.*, COUNT(contract.customer_id) AS so_lan_dat_phong
 FROM
     customer
         JOIN
@@ -131,7 +130,7 @@ FROM
     service_included ON detail_contract.service_included_id = service_included.service_included_id;
       --  task6
       
-      SELECT 
+SELECT 
     service.service_id,
     service.area,
     service.rent_cost,
@@ -161,13 +160,14 @@ FROM
     service
         JOIN
     service_type ON service.service_type_id = service_type.service_type_id
-WHERE EXISTS( SELECT 
+WHERE
+    EXISTS( SELECT 
             contract.service_id
         FROM
             contract
         WHERE
             (contract.contract_start_date BETWEEN '2018-01-01' AND '2018-12-31')
-                AND contract.service_id = service.service_id);   
+                AND contract.service_id = service.service_id);
                 
                 
    --  task8   
@@ -193,12 +193,60 @@ FROM
     
     
   --   task9
-  
+-- select temp.month, count(month(contract.contract_start_date)) as so_khach_hang_dang_ki , sum(contract.full_money) as Tong_tien from
+-- (select 1 as month,
+-- select 2 as month,
+-- select 3 as month,
+-- select 4 as month,
+-- select 5 as month,
+-- select 6 as month,
+-- select 7 as month,
+-- select 8 as month,
+-- select 9 as month,
+-- select 10 as month,
+-- select 11 as month,
+-- select 12 as month) as temp
+
+
+
 SELECT 
-    MONTH(contract.contract_start_date) `month`,
-    COUNT(MONTH(contract.contract_start_date)) AS so_nguoi_dat_phong
+    contract.contract_id,
+    contract.contract_start_date,
+    contract.contract_end_date,
+    contract.deposit_money,
+    COUNT(detail_contract.service_included_id) AS So_luong_dich_vu
 FROM
     contract
+        INNER JOIN
+    detail_contract ON contract.contract_id = detail_contract.contract_id
+GROUP BY contract.contract_id;
+
+-- task11
+SELECT DISTINCT
+    service_included.service_included_id,
+    service_included.price,
+    service_included.unit
+FROM
+    contract
+        INNER JOIN
+    detail_contract ON contract.contract_id = detail_contract.contract_id
+        INNER JOIN
+    service_included ON detail_contract.service_included_id = service_included.service_included_id
+        INNER JOIN
+    customer ON customer.customer_id = contract.customer_id
+        INNER JOIN
+    customer_type ON customer.customer_type_id = customer_type.customer_type_id
 WHERE
-    YEAR(contract.contract_start_date) = '2019'
-GROUP BY `month`;
+    customer_type.customer_type_name = 'Diamond'
+        AND customer.address IN ('Vinh' , 'Quang Ngai');
+
+-- task12
+
+select contract.contract_id , contract.full_money , contract.deposit_money , employee.employee_fullname , customer.customer_fullname , customer.phone , service.service_name,
+ count(service_included_id) as so_lan_su_dung from contract
+ inner join employee on contract.employee_id = employee.employee_id
+ inner join customer on contract.customer_id = customer.customer_id
+ inner join service on service.service_id = contract.service_id
+ inner join detail_contract on contract.contract_id = detail_contract.contract_id
+ where not exists (select contract.contract_id where contract.contract_start_date between '2019-01-01' and '2019-06-31')
+ and exists (select contract.contract_id where contract.contract_start_date between '2019-09-01' and '2019-12-31')
