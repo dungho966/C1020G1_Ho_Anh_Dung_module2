@@ -249,4 +249,34 @@ select contract.contract_id , contract.full_money , contract.deposit_money , emp
  inner join service on service.service_id = contract.service_id
  inner join detail_contract on contract.contract_id = detail_contract.contract_id
  where not exists (select contract.contract_id where contract.contract_start_date between '2019-01-01' and '2019-06-31')
- and exists (select contract.contract_id where contract.contract_start_date between '2019-09-01' and '2019-12-31')
+ and exists (select contract.contract_id where contract.contract_start_date between '2019-09-01' and '2019-12-31');
+ 
+  -- task13
+ 
+ 
+ -- task14
+ select contract.contract_id, service_type.service_type_name, service_included.service_included_name,
+count(detail_contract.service_included_id) so_lan_su_dung
+from contract
+join service on service.service_id =  contract.service_id
+join detail_contract on contract.contract_id = detail_contract.contract_id
+join service_included on detail_contract.service_included_id = service_included.service_included_id
+
+join service_type on service.service_type_id = service_type.service_type_id
+ 
+group by service_included.service_included_name having so_lan_su_dung = 1;
+ 
+ 
+ 
+ -- task15
+ 
+ select employee.employee_id, employee.employee_fullname, level_employee.level_id, department.department_name, employee.phone, employee.address,
+count(contract.employee_id) so_lan_lap_hop_dong
+from employee
+join level_employee on employee.level_id = level_employee.level_id
+join department on employee.department_id = department.department_id
+join contract on employee. employee_id = contract.employee_id
+where contract.contract_start_date between "2018-01-01" and "2019-12-31"
+group by employee.employee_fullname
+having so_lan_lap_hop_dong <=3;
+
