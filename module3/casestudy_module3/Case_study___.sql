@@ -280,3 +280,79 @@ where contract.contract_start_date between "2018-01-01" and "2019-12-31"
 group by employee.employee_fullname
 having so_lan_lap_hop_dong <=3;
 
+-- task16
+DELETE FROM employee 
+WHERE
+    NOT EXISTS( SELECT 
+        employee.employee_id
+    FROM
+        contract
+    
+    WHERE
+        contract.contract_start_date BETWEEN '2017-01-01' AND '2019-31-12'
+        AND contract.employee_id = employee.employee_id);
+        
+ -- task17
+UPDATE customer,
+    (SELECT 
+        contract.customer_id AS id,
+            SUM(contract.full_money) AS tong_tien
+    FROM
+        contract
+    WHERE
+        YEAR(contract.contract_start_date) = 2019
+    GROUP BY contract.customer_id
+    HAVING tong_tien > 10000000) AS temp 
+SET 
+    customer.customer_type_id = (SELECT 
+            customer_type.customer_type_id
+        FROM
+            customer_type
+        WHERE
+            customer_type.customer_type_name = 'Diamond')
+WHERE
+    customer.customer_id = (SELECT 
+            customer_type.customer_type_id
+        FROM
+            customer_type
+        WHERE
+            customer_type.customer_type_name = 'Diamond')
+        AND temp.id = customer.customer_id;
+        
+        -- task18
+delete customer, contract , detail_contract from customer inner join contract on customer.customer_id = contract.customer_id
+inner join detail_contract on contract.contract_id = detail_contract.contract_id
+where not exists (select contract.contract_id where year(contract.contract_start_date)> '2016' and customer.customer_id = contract.customer_id);
+
+-- task19
+update service_included inner join (select service_included.service_included_name as ten_dich_vu_di_kem
+from detail_contract inner join service_included on service_included.service_included_id = detail_contract.service_included_id 
+group by service_included.service_included_id
+having count(detail_contract.service_included_id)>3) as temp set service_included.price = service_included.price*2 where service_included.service_included_name = temp.ten_dich_vu_di_kem;
+
+-- task20
+SELECT 
+    employee.employee_id AS ID,
+    employee.employee_fullname,
+    employee.email,
+    employee.phone,
+    employee.date_of_birth,
+    employee.address,
+    'nhanvien' AS Fromtable
+FROM
+    employee 
+UNION ALL SELECT 
+    customer.customer_id AS ID,
+    customer.customer_fullname,
+    customer.email,
+    customer.phone,
+    customer.date_of_birth,
+    customer.address,
+    'khachhang' AS Fromtable
+FROM
+    customer;
+
+
+
+
+
