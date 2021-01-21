@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        [class*="col-"] {
+            float: left;
+            padding: 10px;
+        }
+        @media only screen and (max-width: 768px) {
+            [class*="col-"] {
+                width: 100%;
+            }
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../thuchanh/bootstrap.min.css">
+
+</head>
+<body>
+    <h1>Responsive Image Gallery</h1>
+    <p>Resize the browser window to see the effect.</p>
+    <div class="row">
+        <div class="card" style="width: 18rem;">
+            <img src="../king-eric-cantona-is-number-seven-1742.jpg" class="card-img-top" alt="..."
+                 width="500" height="300">
+            <div class="card-body">
+                <p class="card-text"> Eric Cantona</p>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="../beckham-noi-gi-sau-khi-khong-duoc-sir-alex-coi-la-cau-thu-dang-cap-the-gioi.jpg"
+                 class="card-img-top" alt="..." width="500" height="300">
+            <div class="card-body">
+                <p class="card-text">David Beckham</p>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="../ronaldo-so7.jpg" class="card-img-top" alt="..." width="500" height="300">
+            <div class="card-body">
+                <p class="card-text"> Cristiano Ronaldo</p>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="../1-1411.jpg" class="card-img-top" alt="..." width="500" height="300">
+            <div class="card-body">
+                <p class="card-text"> Edison Cavani</p>
+            </div>
+        </div>
+        <p style="padding: 20px">This example use media queries to re-arrange the images on different screen sizes: for screens larger than
+            700px wide, it will show four images side by side, for screens smaller than 700px, it will show two images
+            side by side. For screens smaller than 500px, the images will stack vertically (100%).</p>
+
+
+       
+    </div>
+
+
+</body>
+</html>
