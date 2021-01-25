@@ -13,10 +13,10 @@
   <body>
   <form method="post" action = "/Calc">
     <label>List Price: </label><br/>
-    <input type="text" name="List Price" placeholder="List Price "/><br/>
+    <input type="text" name="ListPrice" placeholder="List Price "/><br/>
     <label> Discount Percent: </label><br/>
-    <input type="text" name=" Discount Percent" placeholder=" Discount Percent" value="0"/><br/>
-    <input type = "submit" id = "submit" value = "Discount Amount"/>z
+    <input type="text" name="DiscountPercent" placeholder=" Discount Percent" /><br/>
+    <input type = "submit" id = "submit" value = "Discount Amount"/>
   </form>
 
 
